@@ -27,4 +27,9 @@ INSERT INTO DOGS (NAME, AGE, OWNER_ID) VALUES
 ('Cricket', 10, 1),
 ('Rocky', 2, 2),
 ('Coco', 3, 3),
-('Romeo', 5, 4);
+('Romeo', 5, 4),
+('Charlie', 8, 1),
+('Buddy', 2, 2),
+('Duke', 3, 3),
+('Bailey', 5, 4),
+('Bear', 4, 2);
