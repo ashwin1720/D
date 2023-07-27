@@ -33,3 +33,4 @@ INSERT INTO DOGS (NAME, AGE, OWNER_ID) VALUES
 ('Duke', 3, 3),
 ('Bailey', 5, 4),
 ('Bear', 4, 2);
+try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));)
