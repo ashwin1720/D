@@ -41,3 +41,62 @@ https://github.com/jordanbenbelaidn/BlackJack-Testing
 
 https://github.com/abharg22/WebDevelopment
 https://github.com/stream2stream/arrakis_v3/tree/main
+
+
+
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+
+@Component
+public class DataLoader {
+
+    @PostConstruct
+    public void loadData() {
+        try {
+            // Load the CSV file from the resources folder
+            InputStream inputStream = getClass().getResourceAsStream("/data.csv");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+
+            // Skip the header line if necessary
+            String line = reader.readLine();
+
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+
+                // Assuming the CSV columns are in the order of table fields, adjust the indexes accordingly
+                String field1 = data[0];
+                int field2 = Integer.parseInt(data[1]);
+                String field3 = data[2];
+                int field4 = Integer.parseInt(data[3]);
+                String field5 = data[4];
+                int field6 = Integer.parseInt(data[5]);
+                String field7 = data[6];
+                int field8 = Integer.parseInt(data[7]);
+
+                // Save data into respective tables using Spring Data JPA or your preferred data access method
+                // For simplicity, let's assume we have a service and repository for each table
+
+                // Save data into table1
+                table1Service.save(new Table1(field1, field2));
+
+                // Save data into table2
+                table2Service.save(new Table2(field3, field4));
+
+                // Save data into table3
+                table3Service.save(new Table3(field5, field6));
+
+                // Save data into table4
+                table4Service.save(new Table4(field7, field8));
+            }
+
+            reader.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
