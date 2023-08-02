@@ -44,6 +44,8 @@ https://github.com/stream2stream/arrakis_v3/tree/main
 
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -54,6 +56,13 @@ import java.nio.charset.StandardCharsets;
 
 @Component
 public class DataLoader {
+
+    private final JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public DataLoader(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @PostConstruct
     public void loadData() {
@@ -78,20 +87,19 @@ public class DataLoader {
                 String field7 = data[6];
                 int field8 = Integer.parseInt(data[7]);
 
-                // Save data into respective tables using Spring Data JPA or your preferred data access method
-                // For simplicity, let's assume we have a service and repository for each table
+                // Save data into respective tables using JdbcTemplate
 
                 // Save data into table1
-                table1Service.save(new Table1(field1, field2));
+                jdbcTemplate.update("INSERT INTO table1 (field1, field2) VALUES (?, ?)", field1, field2);
 
                 // Save data into table2
-                table2Service.save(new Table2(field3, field4));
+                jdbcTemplate.update("INSERT INTO table2 (field3, field4) VALUES (?, ?)", field3, field4);
 
                 // Save data into table3
-                table3Service.save(new Table3(field5, field6));
+                jdbcTemplate.update("INSERT INTO table3 (field5, field6) VALUES (?, ?)", field5, field6);
 
                 // Save data into table4
-                table4Service.save(new Table4(field7, field8));
+                jdbcTemplate.update("INSERT INTO table4 (field7, field8) VALUES (?, ?)", field7, field8);
             }
 
             reader.close();
