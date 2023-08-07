@@ -7,33 +7,7 @@ Db.grad@celestial.co.uk
 
 
 
-CREATE TABLE OWNERS(
-owner_id int  AUTO_INCREMENT PRIMARY KEY, 
-name varchar(50) not null
-);
 
-CREATE TABLE DOGS(
-ID int  AUTO_INCREMENT PRIMARY KEY, 
-name varchar(50) not null, 
-age int not null, 
-owner_id int not null,
-FOREIGN KEY (owner_id) REFERENCES owners(owner_id)
-);
-
-
-INSERT INTO OWNERS (NAME) VALUES ('ASH'), ('MONIKA'), ('AKSHAT'), ('LINCOLN');
-
-INSERT INTO DOGS (NAME, AGE, OWNER_ID) VALUES 
-('Cricket', 10, 1),
-('Rocky', 2, 2),
-('Coco', 3, 3),
-('Romeo', 5, 4),
-('Charlie', 8, 1),
-('Buddy', 2, 2),
-('Duke', 3, 3),
-('Bailey', 5, 4),
-('Bear', 4, 2);
-try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));)
 
 
 https://github.com/jordanbenbelaidn/BlackJack-Testing
@@ -43,15 +17,3 @@ https://github.com/abharg22/WebDevelopment
 https://github.com/stream2stream/arrakis_v3/tree/main
 
 
-@Query(nativeQuery = true, value = "SELECT * FROM SECURITY WHERE MATURITY_DATE BETWEEN DATEADD('DAY', -5, :date) AND DATEADD('DAY', 5, :date)")
-List<Security> find5DaysBonds(@Param("date") LocalDateTime date);
-
-
-@Query(nativeQuery = true, value = "SELECT * FROM SECURITY WHERE MATURITY_DATE BETWEEN DATEADD('SECOND', -432000, :date) AND DATEADD('SECOND', 432000, :date)")
-List<Security> find5DaysBonds(@Param("date") LocalDateTime date);
-
-
-DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-        // Format the LocalDateTime object as a string
-        String formattedDateTime = dateTime.format(formatter);
