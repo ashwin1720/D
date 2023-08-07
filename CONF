@@ -63,6 +63,10 @@ IGNORE 1 LINES
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime parsedDatetime = LocalDateTime.parse(datetime, formatter);
+
+
+ @Query(nativeQuery = true, value = "SELECT * FROM SECURITY WHERE MATURITY_DATE BETWEEN DATEADD('DAY', -5, :date) AND DATEADD('DAY', 5, :date)")
+    List<Security> find5DaysBonds(LocalDateTime date);
 //
         securities = ss.get5DaysBonds(parsedDatetime);
         return ResponseEntity.ok().body(securities);
