@@ -49,3 +49,9 @@ List<Security> find5DaysBonds(@Param("date") LocalDateTime date);
 
 @Query(nativeQuery = true, value = "SELECT * FROM SECURITY WHERE MATURITY_DATE BETWEEN DATEADD('SECOND', -432000, :date) AND DATEADD('SECOND', 432000, :date)")
 List<Security> find5DaysBonds(@Param("date") LocalDateTime date);
+
+
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        // Format the LocalDateTime object as a string
+        String formattedDateTime = dateTime.format(formatter);
