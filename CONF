@@ -49,3 +49,22 @@ FIELDS TERMINATED BY ',' -- Assuming the fields in the CSV are comma-separated
 LINES TERMINATED BY '\n'
 IGNORE 1 LINES
 (col1, col2, col3, col4, col5);
+ @GetMapping("/security/date")
+    public ResponseEntity<List<Security>> get5DaysBonds(@RequestParam("datetime") String encodedDate)
+            throws ResourceNotFoundException{
+        String datetime;
+        List<Security> securities = null;
+        try{
+            datetime = URLDecoder.decode(encodedDate, StandardCharsets.UTF_8.name());
+        }
+        catch(UnsupportedEncodingException e){
+//            return "Error decoding datetime";
+            return ResponseEntity.ok().body(securities);
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime parsedDatetime = LocalDateTime.parse(datetime, formatter);
+//
+        securities = ss.get5DaysBonds(parsedDatetime);
+        return ResponseEntity.ok().body(securities);
+    }
+http://localhost:8080/security/date?datetime=2023-08-05%2010:39:37
