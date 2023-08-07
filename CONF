@@ -72,3 +72,8 @@ IGNORE 1 LINES
         return ResponseEntity.ok().body(securities);
     }
 http://localhost:8080/security/date?datetime=2023-08-05%2010:39:37
+
+
+@Query(nativeQuery = true, value = "SELECT * FROM SECURITY WHERE MATURITY_DATE BETWEEN :date - INTERVAL '5' DAY AND :date + INTERVAL '5' DAY")
+List<Security> find5DaysBonds(@Param("date") LocalDateTime date);
+
